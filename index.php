@@ -25,22 +25,32 @@
 					?>
 					<table class = "table">
 						<tr>
+							<th>seq</th>
 							<th>ID</th>
 							<th>fanme</th>
 							<th>lname</th>
 							<th>contact</th>
+							<th>Oparator</th>
 						</tr>
 						<?php
+							$x=1;
 							foreach($output as $row) {
 						 ?>
 
 						<tr>
+							<td><?php echo $x; ?></td>
 							<td><?php echo $row[0]; ?></td>
 							<td><?php echo $row[1]; ?></td>
 							<td><?php echo $row[2]; ?></td>
 							<td><?php echo $row[3]; ?></td>
+							<td>
+								<button type="button" class="btn btn-warning">Edit</button>
+								<button type="button" class="btn btn-danger" onclick="deleteMember(<?php echo $row[0]; ?>)">Delete</button>
+
+							</td>
 						</tr>
 							<?php
+										$x++;
 									}
 							 ?>
 
@@ -55,12 +65,39 @@
 					<div class="modal-header">
 						please enter member data :
 					</div>
-				<form method="POST" action="phplip/create.php">
+
+
+				<form class ="form-horizontal"= method="POST" action="phplip/create.php">
 					<div class="modal-body">
-						ID : <input type="text" name="id"><br>
-						Fname : <input type="text" name="fname"><br>
-						Lname : <input type="text" name="lname"><br>
-						contact : <input type="text" name="contact"><br>
+
+					<div class="from-group">
+						<label class="control-label col-sm-2">ID : </label>
+						<div class="col-sm-10">
+							<input  type="text" class="form-control" name="id"><br>
+						</div>
+					</div>
+
+					<div class="from-group">
+						<label class="control-label col-sm-2">Fname : </label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="fname"><br>
+						</div>
+					</div>
+
+					<div class="from-group">
+						<label class="control-label col-sm-2">Lname : </label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="lname"><br>
+						</div>
+					</div>
+
+					<div class="from-group">
+						<label class="control-label col-sm-2">contact : </label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="contact"><br>
+						</div>
+					</div>
+
 
 					</div>
 					<div class="modal-footer">
@@ -89,6 +126,21 @@
 		<!-- datatables js -->
 		<script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+		<script type="text/javascript">
+		function deleteMember(id){
+			alert(id);
+			$.ajax({
+				url: 'phplip/delete.php',
+				type: 'post',
+				data: {mid:id},
+				success: function(response){
+						alert('deleted');
+						window.location.replace("http://localhost/crudExample/emem/index.php");
+
+				}
+			});
+		}
+		</script>
 
 
 	</body>
