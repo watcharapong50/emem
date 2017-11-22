@@ -12,7 +12,7 @@
      require_once 'retive.php';
      $result = $conn->query($sql);
      if($result == TRUE){
-       header("Location:http://localhost/crudExample");
+       header("Location:http://localhost/crudExample/emem");
      }else {
        die("can't con");
      }
